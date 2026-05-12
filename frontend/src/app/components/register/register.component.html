@@ -1,0 +1,38 @@
+<div class="main-wrapper">
+  <div class="glass-container auth-card">
+    <div class="auth-logo">Cloudly</div>
+    <h2 style="font-size: 1.5rem; margin-bottom: 2rem; -webkit-text-fill-color: var(--text-main);">{{ 'AUTH.REGISTER_TITLE' | translate }}</h2>
+    
+    <form (ngSubmit)="registrar()">
+      <div class="form-group">
+        <input type="text" name="nome" [(ngModel)]="novoUsuario.nome" placeholder="{{ 'AUTH.FULL_NAME_PLACEHOLDER' | translate }}" required>
+      </div>
+      
+      <div class="form-group">
+        <input type="email" name="email" [(ngModel)]="novoUsuario.email" placeholder="{{ 'AUTH.EMAIL_PLACEHOLDER' | translate }}" required>
+      </div>
+      
+      <div class="form-group">
+        <input type="password" name="senha" [(ngModel)]="novoUsuario.senha" placeholder="{{ 'AUTH.PASSWORD_PLACEHOLDER' | translate }}" required>
+      </div>
+
+      <div class="form-group">
+        <input type="password" name="confirmarSenha" [(ngModel)]="novoUsuario.confirmarSenha" placeholder="{{ 'AUTH.CONFIRM_PASSWORD_PLACEHOLDER' | translate }}" required>
+      </div>
+      
+      <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1rem;">
+        {{ 'AUTH.CREATE_ACCOUNT' | translate }}
+      </button>
+    </form>
+
+    <div class="message" [ngClass]="{'message-error': mensagem && !mensagem.includes('sucesso'), 'message-success': mensagem && mensagem.includes('sucesso')}" *ngIf="mensagem" style="margin-top: 1rem;">
+      {{ mensagem }}
+    </div>
+    
+    <div style="margin-top: 2rem; text-align: center; border-top: 1px solid var(--border); padding-top: 1.5rem;">
+      <button type="button" class="btn-secondary" style="background: none; color: var(--text-muted); padding: 0.5rem;" routerLink="/login">
+        {{ 'AUTH.ALREADY_HAVE_ACCOUNT' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

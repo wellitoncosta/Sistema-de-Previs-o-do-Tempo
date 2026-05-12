@@ -1,0 +1,26 @@
+.export-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .app-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 1rem 0;
+  }
+
+  .sidebar-item {
+    margin: 0;
+  }
+
+  .main-content {
+    padding: 1.5rem;
+  }
+}

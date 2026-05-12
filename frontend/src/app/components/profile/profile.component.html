@@ -1,0 +1,62 @@
+<div class="app-container">
+  <aside class="sidebar">
+    <div class="sidebar-item" routerLink="/dashboard" title="{{ 'NAV.DASHBOARD' | translate }}">
+      <i class="bi bi-grid"></i>
+    </div>
+    <div class="sidebar-item" routerLink="/favorites" title="{{ 'NAV.FAVORITES' | translate }}">
+      <i class="bi bi-star"></i>
+    </div>
+    <div class="sidebar-item active" routerLink="/profile" title="{{ 'NAV.PROFILE' | translate }}">
+      <i class="bi bi-person-fill"></i>
+    </div>
+    <div class="sidebar-item" routerLink="/settings" title="{{ 'NAV.SETTINGS' | translate }}">
+      <i class="bi bi-gear"></i>
+    </div>
+    <div class="sidebar-item" routerLink="/export" routerLinkActive="active" title="{{ 'NAV.EXPORT' | translate }}">
+      <i class="bi bi-file-earmark-arrow-down"></i>
+    </div>
+    <div style="margin-top: auto;" class="sidebar-item logout" (click)="logout()" title="{{ 'NAV.LOGOUT' | translate }}">
+      <i class="bi bi-box-arrow-left"></i>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="main-wrapper" style="background: none; padding: 0;">
+      <div class="glass-container" style="max-width: 600px; width: 100%;">
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <div style="width: 100px; height: 100px; border-radius: 50%; background: var(--primary); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; color: white;">
+            {{ user?.nome?.charAt(0).toUpperCase() }}
+          </div>
+          <h2>{{ 'PROFILE.TITLE' | translate }}</h2>
+          <p class="text-muted">{{ 'PROFILE.SUBTITLE' | translate }}</p>
+        </div>
+
+        <div class="widget-card" style="margin-bottom: 2rem; background: var(--glass);">
+          <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <div>
+              <label class="text-muted">{{ 'PROFILE.USERNAME_LABEL' | translate }}</label>
+              <h3 style="margin-top: 0.5rem;">{{ user?.nome }}</h3>
+            </div>
+            <div>
+              <label class="text-muted">{{ 'PROFILE.EMAIL_LABEL' | translate }}</label>
+              <h3 style="margin-top: 0.5rem;">{{ user?.email }}</h3>
+            </div>
+            <div>
+              <label class="text-muted">{{ 'PROFILE.MEMBER_SINCE' | translate }}</label>
+              <h3 style="margin-top: 0.5rem;">{{ 'PROFILE.MEMBER_SINCE_DATE' | translate }}</h3>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem;">
+          <button class="btn-primary" style="flex: 1;" routerLink="/settings">
+            {{ 'PROFILE.EDIT_PROFILE' | translate }}
+          </button>
+          <button class="btn-secondary" style="flex: 1;" (click)="goBack()">
+            {{ 'COMMON.BACK' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

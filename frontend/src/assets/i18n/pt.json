@@ -1,0 +1,91 @@
+{
+    "TITLE": "Sistema de Previsão do Tempo",
+    "SEARCH": "Pesquisar Cidade",
+    "TEMPERATURE": "Temperatura",
+    "LOGIN": "Entrar",
+    "COMMON": {
+        "CONTROL_PANEL": "Painel de Controlo",
+        "CLOSE": "Fechar",
+        "BACK": "Voltar"
+    },
+    "NAV": {
+        "DASHBOARD": "Dashboard",
+        "FAVORITES": "Favoritos",
+        "PROFILE": "Perfil",
+        "SETTINGS": "Configurações",
+        "EXPORT": "Exportar Dados",
+        "LOGOUT": "Sair"
+    },
+    "DASHBOARD": {
+        "SEARCH_PLACEHOLDER": "Pesquisar cidade...",
+        "SEARCH": "Pesquisar",
+        "FORECAST_7_DAYS": "Previsão para 7 Dias",
+        "WIND": "Vento",
+        "HUMIDITY": "Humidade",
+        "UV_INDEX": "Índice UV",
+        "MODERATE": "Moderado",
+        "VISIBILITY": "Visibilidade",
+        "DEW_POINT": "Ponto de Orvalho",
+        "PRESSURE": "Pressão",
+        "RECENT_HISTORY": "Histórico Recente",
+        "VIEW_ALL": "Ver todas",
+        "NO_SEARCH_HISTORY": "Sem histórico de pesquisa.",
+        "FULL_HISTORY": "Histórico Completo"
+    },
+    "EXPORT": {
+        "TITLE": "Exportar Dados",
+        "SUBTITLE": "Histórico em CSV",
+        "HISTORY_EXPORT": "Exportação de Histórico",
+        "DESCRIPTION": "Clique no botão abaixo para baixar o histórico de cidades pesquisadas em formato CSV.",
+        "BUTTON": "Exportar Histórico em CSV",
+        "NOTE_1": "O arquivo será gerado automaticamente a partir dos dados do seu histórico.",
+        "NOTE_2": "Se o download não iniciar, verifique se o bloqueador de pop-ups está desativado."
+    },
+    "FAVORITES": {
+        "NO_FAVORITES_TITLE": "Nenhuma cidade favoritada",
+        "NO_FAVORITES_BODY": "Pesquise uma cidade na dashboard e clique na estrela para adicioná-la aqui.",
+        "GO_TO_DASHBOARD": "Ir para Dashboard"
+    },
+    "PROFILE": {
+        "TITLE": "Meu Perfil",
+        "SUBTITLE": "Informações da sua conta",
+        "USERNAME_LABEL": "Nome de Utilizador",
+        "EMAIL_LABEL": "Endereço de Email",
+        "MEMBER_SINCE": "Membro desde",
+        "MEMBER_SINCE_DATE": "Maio, 2026",
+        "EDIT_PROFILE": "Editar Perfil"
+    },
+    "AUTH": {
+        "LOGIN_TITLE": "Entrar no sistema",
+        "EMAIL_PLACEHOLDER": "Email",
+        "PASSWORD_PLACEHOLDER": "Senha",
+        "LOGIN_BUTTON": "Login",
+        "NO_ACCOUNT": "Ainda não tem conta?",
+        "CREATE_ACCOUNT": "Criar conta",
+        "REGISTER_TITLE": "Crie sua conta",
+        "FULL_NAME_PLACEHOLDER": "Nome Completo",
+        "CONFIRM_PASSWORD_PLACEHOLDER": "Confirmar Senha",
+        "ALREADY_HAVE_ACCOUNT": "Já tenho uma conta"
+    },
+    "SETTINGS": {
+        "TITLE": "Definições da Conta",
+        "SUBTITLE": "Personalize sua experiência no Cloudly",
+        "PERSONAL_INFO": "Dados Pessoais",
+        "FULL_NAME": "Nome Completo",
+        "YOUR_NAME": "Seu nome",
+        "EMAIL": "Email",
+        "YOUR_EMAIL": "email@exemplo.com",
+        "NEW_PASSWORD": "Nova Senha",
+        "PASSWORD_PLACEHOLDER": "••••••••",
+        "PREFERENCES": "Preferências",
+        "LANGUAGE": "Idioma da Interface",
+        "TEMPERATURE_UNIT": "Unidade de Temperatura",
+        "NOTIFICATIONS": "Notificações",
+        "APPLY_CHANGES": "Aplicar Alterações",
+        "CANCEL": "Cancelar",
+        "SECURITY_CHECK": "Verificação de Segurança",
+        "SECURITY_CHECK_TEXT": "Para salvar as alterações, por favor confirme a sua senha atual.",
+        "CURRENT_PASSWORD": "Sua senha atual",
+        "CONFIRM": "Confirmar"
+    }
+}

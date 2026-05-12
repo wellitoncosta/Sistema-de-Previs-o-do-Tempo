@@ -1,0 +1,217 @@
+:host {
+  --app-bg: var(--bg-main);
+  --sidebar-bg: var(--bg-card);
+  --card-bg: var(--bg-card);
+  --primary-blue: #3b82f6;
+  --text-white: var(--text-main);
+  --text-dim: var(--text-muted);
+  display: block;
+  height: 100vh;
+  width: 100vw;
+}
+
+.app-container {
+  background-color: var(--app-bg);
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  color: var(--text-white);
+  overflow: hidden;
+}
+
+/* Sidebar (reused for consistency, though ideally a shared component) */
+.sidebar {
+  width: 100px;
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 0;
+}
+
+.sidebar-item {
+  color: var(--text-dim);
+  font-size: 1.6rem;
+  padding: 15px;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-item:hover {
+  color: var(--text-white);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-item.active {
+  color: var(--primary-blue);
+  background: rgba(59, 130, 246, 0.12);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+}
+
+.sidebar-item.logout:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.main-content {
+  flex: 1;
+  padding: 3rem 4rem;
+  overflow-y: auto;
+}
+
+.profile-circle {
+  width: 44px;
+  height: 44px;
+  background: var(--primary-blue);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Favorites Grid */
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.favorite-card {
+  background: var(--card-bg);
+  border-radius: 32px;
+  padding: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.favorite-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary-blue);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.favorite-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, transparent, var(--primary-blue), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.favorite-card:hover::before {
+  opacity: 1;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.city-name {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.btn-remove {
+  background: none;
+  border: none;
+  color: #fbbf24;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-remove:hover {
+  transform: scale(1.2);
+}
+
+.temp-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.temp-val {
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--primary-blue);
+  letter-spacing: -2px;
+}
+
+.weather-desc {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.view-details {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--primary-blue);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  transition: gap 0.2s;
+}
+
+.favorite-card:hover .view-details {
+  gap: 1.2rem;
+}
+
+/* States */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 6rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty-state h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state p {
+  color: var(--text-dim);
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+.loading-state {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  padding: 5rem;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top: 4px solid var(--primary-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

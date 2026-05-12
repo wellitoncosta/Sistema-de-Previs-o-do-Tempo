@@ -1,0 +1,91 @@
+{
+    "TITLE": "Weather Forecast System",
+    "SEARCH": "Search City",
+    "TEMPERATURE": "Temperature",
+    "LOGIN": "Login",
+    "COMMON": {
+        "CONTROL_PANEL": "Control Panel",
+        "CLOSE": "Close",
+        "BACK": "Back"
+    },
+    "NAV": {
+        "DASHBOARD": "Dashboard",
+        "FAVORITES": "Favorites",
+        "PROFILE": "Profile",
+        "SETTINGS": "Settings",
+        "EXPORT": "Export Data",
+        "LOGOUT": "Logout"
+    },
+    "DASHBOARD": {
+        "SEARCH_PLACEHOLDER": "Search city...",
+        "SEARCH": "Search",
+        "FORECAST_7_DAYS": "7-Day Forecast",
+        "WIND": "Wind",
+        "HUMIDITY": "Humidity",
+        "UV_INDEX": "UV Index",
+        "MODERATE": "Moderate",
+        "VISIBILITY": "Visibility",
+        "DEW_POINT": "Dew Point",
+        "PRESSURE": "Pressure",
+        "RECENT_HISTORY": "Recent History",
+        "VIEW_ALL": "View all",
+        "NO_SEARCH_HISTORY": "No search history.",
+        "FULL_HISTORY": "Full History"
+    },
+    "EXPORT": {
+        "TITLE": "Export Data",
+        "SUBTITLE": "CSV History",
+        "HISTORY_EXPORT": "History Export",
+        "DESCRIPTION": "Click the button below to download the search history of cities as a CSV file.",
+        "BUTTON": "Export History as CSV",
+        "NOTE_1": "The file will be generated automatically from your history data.",
+        "NOTE_2": "If the download does not start, please check that pop-up blocking is disabled."
+    },
+    "FAVORITES": {
+        "NO_FAVORITES_TITLE": "No favorited cities",
+        "NO_FAVORITES_BODY": "Search for a city on the dashboard and click the star to add it here.",
+        "GO_TO_DASHBOARD": "Go to Dashboard"
+    },
+    "PROFILE": {
+        "TITLE": "My Profile",
+        "SUBTITLE": "Your account information",
+        "USERNAME_LABEL": "Username",
+        "EMAIL_LABEL": "Email Address",
+        "MEMBER_SINCE": "Member since",
+        "MEMBER_SINCE_DATE": "May, 2026",
+        "EDIT_PROFILE": "Edit Profile"
+    },
+    "AUTH": {
+        "LOGIN_TITLE": "Sign in to your account",
+        "EMAIL_PLACEHOLDER": "Email",
+        "PASSWORD_PLACEHOLDER": "Password",
+        "LOGIN_BUTTON": "Login",
+        "NO_ACCOUNT": "Don't have an account yet?",
+        "CREATE_ACCOUNT": "Create account",
+        "REGISTER_TITLE": "Create your account",
+        "FULL_NAME_PLACEHOLDER": "Full Name",
+        "CONFIRM_PASSWORD_PLACEHOLDER": "Confirm Password",
+        "ALREADY_HAVE_ACCOUNT": "I already have an account"
+    },
+    "SETTINGS": {
+        "TITLE": "Account Settings",
+        "SUBTITLE": "Customize your Cloudly experience",
+        "PERSONAL_INFO": "Personal Information",
+        "FULL_NAME": "Full Name",
+        "YOUR_NAME": "Your name",
+        "EMAIL": "Email",
+        "YOUR_EMAIL": "you@example.com",
+        "NEW_PASSWORD": "New Password",
+        "PASSWORD_PLACEHOLDER": "••••••••",
+        "PREFERENCES": "Preferences",
+        "LANGUAGE": "Interface Language",
+        "TEMPERATURE_UNIT": "Temperature Unit",
+        "NOTIFICATIONS": "Notifications",
+        "APPLY_CHANGES": "Apply Changes",
+        "CANCEL": "Cancel",
+        "SECURITY_CHECK": "Security Verification",
+        "SECURITY_CHECK_TEXT": "To save changes, please confirm your current password.",
+        "CURRENT_PASSWORD": "Current password",
+        "CONFIRM": "Confirm"
+    }
+}

@@ -1,0 +1,181 @@
+<div class="app-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-item" routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" title="{{ 'NAV.DASHBOARD' | translate }}">
+      <i class="bi bi-grid-fill"></i>
+    </div>
+    <div class="sidebar-item" routerLink="/favorites" routerLinkActive="active" title="{{ 'NAV.FAVORITES' | translate }}">
+      <i class="bi bi-star"></i>
+    </div>
+    <div class="sidebar-item" routerLink="/profile" routerLinkActive="active" title="{{ 'NAV.PROFILE' | translate }}">
+      <i class="bi bi-person"></i>
+    </div>
+    <div class="sidebar-item" routerLink="/settings" routerLinkActive="active" title="{{ 'NAV.SETTINGS' | translate }}">
+      <i class="bi bi-gear"></i>
+    </div>
+    <div class="sidebar-item" routerLink="/export" routerLinkActive="active" title="{{ 'NAV.EXPORT' | translate }}">
+      <i class="bi bi-file-earmark-arrow-down"></i>
+    </div>
+    <div style="margin-top: auto;" class="sidebar-item logout" (click)="logout()" title="{{ 'NAV.LOGOUT' | translate }}">
+      <i class="bi bi-box-arrow-left"></i>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <!-- Header -->
+    <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+      <div class="search-bar-pill">
+        <input type="text" [(ngModel)]="cidade" placeholder="{{ 'DASHBOARD.SEARCH_PLACEHOLDER' | translate }}" (keyup.enter)="consultarClima()">
+        <button class="btn-search-blue" (click)="consultarClima()">{{ 'DASHBOARD.SEARCH' | translate }}</button>
+      </div>
+      
+      <div style="display: flex; gap: 2rem; align-items: center;">
+        <button class="theme-toggle-circle" (click)="toggleTheme()">
+          <i class="bi" [ngClass]="isDarkMode ? 'bi-sun' : 'bi-moon-stars'"></i>
+        </button>
+        <div style="display: flex; align-items: center; gap: 1.2rem; cursor: pointer;" routerLink="/profile">
+          <span style="font-weight: 700; font-size: 1rem; color: var(--text-dim);">{{ 'COMMON.CONTROL_PANEL' | translate }}</span>
+          <div class="profile-circle">
+            <i class="bi bi-person-fill"></i>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Grid -->
+    <div class="dashboard-grid">
+      <!-- Coluna 1: Widget Principal Clima -->
+      <div class="main-weather-card glass-card" *ngIf="dadosClima">
+        <div class="card-header">
+          <h3 class="city-title">
+            <i class="bi bi-geo-alt-fill"></i> {{ dadosClima.name }}
+          </h3>
+          <div class="header-meta">
+            <button (click)="toggleFavorite()" class="btn-favorite">
+              <i class="bi" [ngClass]="isCurrentFavorite ? 'bi-star-fill' : 'bi-star'"></i>
+            </button>
+            <span class="date-text">{{ today | date:'dd MMM, yyyy' }}</span>
+          </div>
+        </div>
+
+        <div class="temp-display">
+          <h1 class="main-temp-huge">
+            {{ convertTemperature(dadosClima.main.temp) | number:'1.0-0' }}
+            <span class="temp-unit">{{ getTemperatureUnit() }}</span>
+          </h1>
+          <p class="weather-desc-main">{{ dadosClima.weather[0].description }}</p>
+        </div>
+
+        <div class="weather-detail-pill">
+          <div class="detail-item">
+            <p class="detail-label"><i class="bi bi-wind"></i> {{ 'DASHBOARD.WIND' | translate }}</p>
+            <p class="detail-value">{{ dadosClima.wind.speed }} <small>km/h</small></p>
+          </div>
+          <div class="detail-divider"></div>
+          <div class="detail-item">
+            <p class="detail-label"><i class="bi bi-droplet-fill"></i> {{ 'DASHBOARD.HUMIDITY' | translate }}</p>
+            <p class="detail-value">{{ dadosClima.main.humidity }}<small>%</small></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna 2: Previsão e Bento Grid -->
+      <div class="center-column">
+        <!-- Previsão 7 Dias -->
+        <div class="widget-box forecast-widget">
+          <div class="widget-title">
+            <i class="bi bi-calendar-week" style="color: var(--primary-blue);"></i> {{ 'DASHBOARD.FORECAST_7_DAYS' | translate }}
+          </div>
+          <div class="forecast-container">
+            <div *ngFor="let day of previsao" class="forecast-item">
+              <span class="forecast-day">{{ day.dt * 1000 | date:'EEE' }}</span>
+              <img [src]="'https://openweathermap.org/img/wn/' + day.weather[0].icon + '.png'" class="forecast-icon" alt="Weather forecast icon">
+              <div class="forecast-temp-bar">
+                <div class="temp-fill" [style.height.%]="(convertTemperature(day.main.temp) / 40) * 100"></div>
+              </div>
+              <span class="forecast-temp">{{ convertTemperature(day.main.temp) | number:'1.0-0' }}{{ getTemperatureUnit() }}</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Bento Grid de Métricas -->
+        <div class="bento-grid" *ngIf="dadosClima">
+          <div class="bento-item">
+            <p class="bento-label"><i class="bi bi-sun"></i> {{ 'DASHBOARD.UV_INDEX' | translate }}</p>
+            <h4 class="bento-val">4 <small>{{ 'DASHBOARD.MODERATE' | translate }}</small></h4>
+          </div>
+          <div class="bento-item">
+            <p class="bento-label"><i class="bi bi-eye"></i> {{ 'DASHBOARD.VISIBILITY' | translate }}</p>
+            <h4 class="bento-val">{{ dadosClima.visibility / 1000 }} <small>km</small></h4>
+          </div>
+          <div class="bento-item">
+            <p class="bento-label"><i class="bi bi-thermometer-half"></i> {{ 'DASHBOARD.DEW_POINT' | translate }}</p>
+            <h4 class="bento-val">{{ convertTemperature(dadosClima.main.temp - 2) | number:'1.0-0' }}{{ getTemperatureUnit() }}</h4>
+          </div>
+          <div class="bento-item">
+            <p class="bento-label"><i class="bi bi-speedometer"></i> {{ 'DASHBOARD.PRESSURE' | translate }}</p>
+            <h4 class="bento-val">{{ dadosClima.main.pressure }} <small>hPa</small></h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna 3: Histórico e CSV -->
+      <div class="right-column">
+        <div class="widget-box history-widget">
+          <div class="widget-header">
+            <div class="widget-title">
+              <i class="bi bi-clock-history"></i> {{ 'DASHBOARD.RECENT_HISTORY' | translate }}
+            </div>
+            <button class="btn-view-all" (click)="abrirHistorico()">{{ 'DASHBOARD.VIEW_ALL' | translate }}</button>
+          </div>
+          
+          <div class="history-list">
+            <div *ngFor="let h of historicoCidades.slice(0, 3)" 
+                 class="history-card" 
+                 (click)="pesquisarDoHistorico(h.cidade)"
+                 (keydown.enter)="pesquisarDoHistorico(h.cidade)"
+                 tabindex="0">
+              <div class="history-info">
+                <p class="history-city">{{ h.cidade }}</p>
+                <p class="history-desc">{{ h.descricao_clima }}</p>
+              </div>
+              <span class="history-temp">{{ convertTemperature(h.temperatura) | number:'1.0-0' }}{{ getTemperatureUnit() }}</span>
+            </div>
+            <div *ngIf="historicoCidades.length === 0" class="empty-info">
+              {{ 'DASHBOARD.NO_SEARCH_HISTORY' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal de Histórico -->
+  <div class="modal-overlay" *ngIf="showHistoryModal" (click)="showHistoryModal = false" (keydown.escape)="showHistoryModal = false" tabindex="-1">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>{{ 'DASHBOARD.FULL_HISTORY' | translate }}</h3>
+        <button class="modal-close-button" (click)="showHistoryModal = false" aria-label="Close">×</button>
+      </div>
+
+      <div class="modal-history-list">
+        <div *ngFor="let item of historicoCidades" 
+             (click)="pesquisarDoHistorico(item.cidade)"
+             (keydown.enter)="pesquisarDoHistorico(item.cidade)"
+             class="history-item-row" tabindex="0">
+          <div>
+            <p class="history-item-city">{{ item.cidade }}</p>
+            <p class="history-item-desc">{{ item.descricao_clima }}</p>
+          </div>
+          <div class="history-item-meta">
+            <h3>{{ convertTemperature(item.temperatura) | number:'1.0-0' }}{{ getTemperatureUnit() }}</h3>
+            <p>{{ item.data_consulta | date:'dd/MM HH:mm' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-csv-blue modal-close-action" (click)="showHistoryModal = false">{{ 'COMMON.CLOSE' | translate }}</button>
+    </div>
+  </div>
+</div>
+

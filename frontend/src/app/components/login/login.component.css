@@ -1,0 +1,23 @@
+.login-footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.btn-theme {
+  background: none;
+  border: 1px solid #ccc;
+  color: inherit;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+}
+
+.message {
+  color: #d9534f; /* Vermelho para erros */
+  font-weight: bold;
+}
