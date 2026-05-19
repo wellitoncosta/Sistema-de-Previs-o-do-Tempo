@@ -12,7 +12,7 @@
     <div class="sidebar-item" routerLink="/settings" title="{{ 'NAV.SETTINGS' | translate }}">
       <i class="bi bi-gear-fill"></i>
     </div>
-    <div class="sidebar-item" routerLink="/export" routerLinkActive="active" title="{{ 'NAV.EXPORT' | translate }}">
+    <div class="sidebar-item" routerLink="/export" title="{{ 'NAV.EXPORT' | translate }}">
       <i class="bi bi-file-earmark-arrow-down"></i>
     </div>
     <div style="margin-top: auto;" class="sidebar-item logout" (click)="logout()" title="{{ 'NAV.LOGOUT' | translate }}">
@@ -23,35 +23,56 @@
   <main class="main-content">
     <div class="main-wrapper" style="background: none; padding: 0;">
       <div class="glass-container" style="max-width: 800px; width: 100%; padding: 2.5rem;">
+        
         <div style="text-align: center; margin-bottom: 2rem;">
           <h2 style="-webkit-text-fill-color: var(--text-main); font-size: 2rem;">{{ 'SETTINGS.TITLE' | translate }}</h2>
           <p class="text-muted">{{ 'SETTINGS.SUBTITLE' | translate }}</p>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-          <!-- Coluna 1: Dados Pessoais -->
+          
           <section>
-            <h3 style="margin-bottom: 1.5rem; font-size: 1.1rem;"><i class="bi bi-person-badge"></i> {{ 'SETTINGS.PERSONAL_INFO' | translate }}</h3>
+            <h3 style="margin-bottom: 1.5rem; font-size: 1.1rem;">
+              <i class="bi bi-person-badge"></i> {{ 'SETTINGS.PERSONAL_INFO' | translate }}
+            </h3>
             <div class="widget-card" style="background: var(--glass); border: none;">
+              
               <div class="form-group">
                 <label class="text-muted" style="font-size: 0.8rem;">{{ 'SETTINGS.FULL_NAME' | translate }}</label>
                 <input type="text" name="nome" [(ngModel)]="user.nome" placeholder="{{ 'SETTINGS.YOUR_NAME' | translate }}">
               </div>
+
               <div class="form-group">
                 <label class="text-muted" style="font-size: 0.8rem;">{{ 'SETTINGS.EMAIL' | translate }}</label>
-                <input type="email" name="email" [(ngModel)]="user.email" placeholder="{{ 'SETTINGS.YOUR_EMAIL' | translate }}">
+                <input type="email" name="email" [(ngModel)]="user.email" placeholder="{{ 'SETTINGS.YOUR_EMAIL' | translate }}" disabled style="opacity: 0.7; cursor: not-allowed;">
               </div>
-              <div class="form-group">
-                <label class="text-muted" style="font-size: 0.8rem;">{{ 'SETTINGS.NEW_PASSWORD' | translate }}</label>
-                <input type="password" name="senha" [(ngModel)]="user.senha" placeholder="{{ 'SETTINGS.PASSWORD_PLACEHOLDER' | translate }}">
+              
+              <div class="form-group" style="margin-top: 1rem;">
+                <label class="text-muted" style="font-size: 0.8rem; color: #ff9800 !important; font-weight: bold;">
+                  Senha Atual (Obrigatória)
+                </label>
+                <input type="password" name="senhaAtual" [(ngModel)]="user.senhaAtual" placeholder="Introduza a sua senha atual">
               </div>
+
+              <div class="form-group" style="margin-top: 1rem;">
+                <label class="text-muted" style="font-size: 0.8rem;">Nova Senha</label>
+                <input type="password" name="senha" [(ngModel)]="user.senha" placeholder="Deixe em branco para não alterar">
+              </div>
+
+              <div class="form-group" style="margin-top: 1rem;" *ngIf="user.senha">
+                <label class="text-muted" style="font-size: 0.8rem;">Confirmar Nova Senha</label>
+                <input type="password" name="confirmarSenha" [(ngModel)]="user.confirmarSenha" placeholder="Confirme a nova senha">
+              </div>
+
             </div>
           </section>
 
-          <!-- Coluna 2: Preferências do Sistema -->
           <section>
-            <h3 style="margin-bottom: 1.5rem; font-size: 1.1rem;"><i class="bi bi-sliders"></i> {{ 'SETTINGS.PREFERENCES' | translate }}</h3>
+            <h3 style="margin-bottom: 1.5rem; font-size: 1.1rem;">
+              <i class="bi bi-sliders"></i> {{ 'SETTINGS.PREFERENCES' | translate }}
+            </h3>
             <div class="widget-card" style="background: var(--glass); border: none;">
+              
               <div class="form-group">
                 <label class="text-muted" style="font-size: 0.8rem;">{{ 'SETTINGS.LANGUAGE' | translate }}</label>
                 <select [(ngModel)]="preferences.idioma" (change)="onIdiomaChange()" style="width: 100%; padding: 0.8rem; border-radius: 12px; background: var(--bg-sidebar); color: inherit; border: 1px solid var(--border);">
@@ -59,6 +80,7 @@
                   <option value="en">English (US)</option>
                 </select>
               </div>
+
               <div class="form-group">
                 <label class="text-muted" style="font-size: 0.8rem;">{{ 'SETTINGS.TEMPERATURE_UNIT' | translate }}</label>
                 <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
@@ -66,10 +88,12 @@
                   <button type="button" [class.btn-primary]="preferences.unidade === 'fahrenheit'" (click)="preferences.unidade = 'fahrenheit'; onUnidadeChange()" style="flex: 1; padding: 0.5rem;">°F</button>
                 </div>
               </div>
+
               <div class="form-group" style="display: flex; align-items: center; justify-content: space-between; margin-top: 1rem;">
                 <label class="text-muted">{{ 'SETTINGS.NOTIFICATIONS' | translate }}</label>
                 <input type="checkbox" [(ngModel)]="preferences.notificacoes" style="width: auto;">
               </div>
+
             </div>
           </section>
         </div>
@@ -86,23 +110,30 @@
             {{ 'SETTINGS.CANCEL' | translate }}
           </button>
         </div>
+
       </div>
     </div>
   </main>
 
-  <!-- Modal de Verificação de Segurança -->
   <div class="modal-overlay" *ngIf="showVerifyModal">
-    <div class="modal-content glass-container" style="max-width: 400px; padding: 2.5rem;">
-      <h3 style="margin-bottom: 1rem; -webkit-text-fill-color: var(--text-main);">{{ 'SETTINGS.SECURITY_CHECK' | translate }}</h3>
-      <p class="text-muted" style="margin-bottom: 1.5rem;">{{ 'SETTINGS.SECURITY_CHECK_TEXT' | translate }}</p>
+    <div class="modal-content glass-container" style="max-width: 420px; padding: 2.5rem; border: 1px solid var(--border);">
+      <h3 style="margin-bottom: 1rem; -webkit-text-fill-color: var(--text-main); text-align: center;">Verificação de Segurança</h3>
+      
+      <p class="text-muted" style="margin-bottom: 1.5rem; font-size: 0.9rem; text-align: center;">
+        Enviámos um código de validação para o e-mail <strong>{{ user.email }}</strong> para autorizar as modificações da conta.
+      </p>
       
       <div class="form-group">
-        <input type="password" [(ngModel)]="verifyPassword" placeholder="{{ 'SETTINGS.CURRENT_PASSWORD' | translate }}" style="background: rgba(0,0,0,0.2);">
+        <input type="text" [(ngModel)]="codigoIntroduzidoSettings" placeholder="Insira o código de 6 dígitos" style="background: rgba(0,0,0,0.3); text-align: center; font-size: 1.3rem; letter-spacing: 3px;" maxlength="6">
       </div>
 
-      <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-        <button class="btn-primary" style="flex: 1;" (click)="confirmarESalvar()">{{ 'SETTINGS.CONFIRM' | translate }}</button>
-        <button class="btn-secondary" style="flex: 1;" (click)="showVerifyModal = false; verifyPassword = ''">{{ 'SETTINGS.CANCEL' | translate }}</button>
+      <div *ngIf="mensagemModal" style="margin-top: 1rem; text-align: center; color: #ff4a4a; font-size: 0.9rem; font-weight: bold;">
+        {{ mensagemModal }}
+      </div>
+
+      <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+        <button type="button" class="btn-primary" style="flex: 1;" (click)="verificarCodigoSeguranca()">Confirmar</button>
+        <button type="button" class="btn-secondary" style="flex: 1;" (click canvas)="showVerifyModal = false; mensagemModal = ''">Cancelar</button>
       </div>
     </div>
   </div>

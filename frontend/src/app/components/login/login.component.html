@@ -1,31 +1,84 @@
 <div class="main-wrapper">
   <div class="glass-container auth-card">
     <div class="auth-logo">Cloudly</div>
-    <h2 style="font-size: 1.5rem; margin-bottom: 2rem; -webkit-text-fill-color: var(--text-main);">{{ 'AUTH.LOGIN_TITLE' | translate }}</h2>
     
-    <form (ngSubmit)="onLogin()">
-      <div class="form-group">
-        <input type="email" name="email" [(ngModel)]="credentials.email" placeholder="{{ 'AUTH.EMAIL_PLACEHOLDER' | translate }}" required>
+    <div *ngIf="!exibirRecuperacao">
+      <h2 style="font-size: 1.5rem; margin-bottom: 2rem; -webkit-text-fill-color: var(--text-main);">{{ 'AUTH.LOGIN_TITLE' | translate }}</h2>
+      
+      <form (ngSubmit)="onLogin()">
+        <div class="form-group">
+          <input type="email" name="email" [(ngModel)]="credentials.email" placeholder="{{ 'AUTH.EMAIL_PLACEHOLDER' | translate }}" required>
+        </div>
+
+        <div class="form-group">
+          <input type="password" name="password" [(ngModel)]="credentials.password" placeholder="{{ 'AUTH.PASSWORD_PLACEHOLDER' | translate }}" required>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1rem;">
+          {{ 'AUTH.LOGIN_BUTTON' | translate }}
+        </button>
+      </form>
+
+      <div style="margin-top: 1rem; text-align: right;">
+        <a href="javascript:void(0)" (click)="abrirRecuperacao()" style="color: var(--primary); font-size: 0.85rem; text-decoration: none;">Esqueceu a sua senha?</a>
       </div>
 
-      <div class="form-group">
-        <input type="password" name="password" [(ngModel)]="credentials.password" placeholder="{{ 'AUTH.PASSWORD_PLACEHOLDER' | translate }}" required>
+      <div class="message" [ngClass]="{'message-error': message && !message.includes('sucesso'), 'message-success': message && message.includes('sucesso')}" *ngIf="message" style="margin-top: 1rem;">
+        {{ message }}
       </div>
 
-      <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1rem;">
-        {{ 'AUTH.LOGIN_BUTTON' | translate }}
-      </button>
-    </form>
-
-    <div class="message" [ngClass]="{'message-error': message && !message.includes('sucesso'), 'message-success': message && message.includes('sucesso')}" *ngIf="message" style="margin-top: 1rem;">
-      {{ message }}
+      <div style="margin-top: 2rem; text-align: center; border-top: 1px solid var(--border); padding-top: 1.5rem;">
+        <p class="text-muted">{{ 'AUTH.NO_ACCOUNT' | translate }}</p>
+        <button type="button" class="btn-secondary" style="background: none; color: var(--primary); padding: 0.5rem;" (click)="irParaRegisto()">
+          {{ 'AUTH.CREATE_ACCOUNT' | translate }}
+        </button>
+      </div>
     </div>
 
-    <div style="margin-top: 2rem; text-align: center; border-top: 1px solid var(--border); padding-top: 1.5rem;">
-      <p class="text-muted">{{ 'AUTH.NO_ACCOUNT' | translate }}</p>
-      <button type="button" class="btn-secondary" style="background: none; color: var(--primary); padding: 0.5rem;" (click)="irParaRegisto()">
-        {{ 'AUTH.CREATE_ACCOUNT' | translate }}
-      </button>
+    <div *ngIf="exibirRecuperacao">
+      <h2 style="font-size: 1.3rem; margin-bottom: 1.5rem; -webkit-text-fill-color: var(--text-main);">Recuperar Senha</h2>
+
+      <div class="message message-error" style="margin-bottom: 1rem; font-size: 0.9rem;" *ngIf="msgRecuperacao">
+        {{ msgRecuperacao }}
+      </div>
+
+      <div *ngIf="subStepRecuperar === 1">
+        <div class="form-group">
+          <input type="email" [(ngModel)]="emailRecuperacao" placeholder="Insira o seu e-mail de registo">
+        </div>
+        <button type="button" class="btn-primary" style="width: 100%; margin-top: 0.5rem;" (click)="enviarCodigoRecuperacao()">
+          Enviar Código de Validação
+        </button>
+      </div>
+
+      <div *ngIf="subStepRecuperar === 2">
+        <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1rem;">Inserir o código de 6 dígitos enviado para o seu e-mail.</p>
+        <div class="form-group">
+          <input type="text" [(ngModel)]="codigoIntroduzidoRecuperar" placeholder="Código de 6 dígitos" maxlength="6">
+        </div>
+        <button type="button" class="btn-primary" style="width: 100%; margin-top: 0.5rem;" (click)="verificarCodigoRecuperacao()">
+          Verificar Código
+        </button>
+      </div>
+
+      <div *ngIf="subStepRecuperar === 3">
+        <div class="form-group">
+          <input type="password" [(ngModel)]="novaSenhaRecuperar" placeholder="Nova Senha">
+        </div>
+        <div class="form-group">
+          <input type="password" [(ngModel)]="confirmarSenhaRecuperar" placeholder="Confirmar Nova Senha">
+        </div>
+        <button type="button" class="btn-primary" style="width: 100%; margin-top: 0.5rem;" (click)="submeterNovaSenhaRecuperar()">
+          Atualizar Senha
+        </button>
+      </div>
+
+      <div style="margin-top: 1.5rem; text-align: center; border-top: 1px solid var(--border); padding-top: 1rem;">
+        <button type="button" class="btn-secondary" style="background: none; color: var(--text-muted); padding: 0.5rem;" (click)="voltarAoLogin()">
+          Voltar ao Login
+        </button>
+      </div>
     </div>
+
   </div>
 </div>
